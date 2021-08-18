@@ -4,9 +4,9 @@
 import discord
 
 # el token de nuestro bot. DIFERENTE PARA CADA PERSONA
-TOKEN = 'ODc2NTQ0Mzc1MzY5Mzg0MDM4.YRlnkA.qLDcW1YZ_XT5tsQ8ZAee-iJKnwE'
+TOKEN = 'aqui pon tu token'
 
-# nuestro bot le pondremos el nombre de cliente
+# cliente es la conexion con discord
 client = discord.Client()
 
 #aqui comprobamos si ya se conecto o no
