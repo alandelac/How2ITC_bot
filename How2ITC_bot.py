@@ -1,45 +1,43 @@
 # How2ITC_bot.py
 
-import random
-
+# libreria para conectar el programa con discord
 import discord
 
+# el token de nuestro bot. DIFERENTE PARA CADA PERSONA
 TOKEN = 'ODc2NTQ0Mzc1MzY5Mzg0MDM4.YRlnkA.qLDcW1YZ_XT5tsQ8ZAee-iJKnwE'
 
+# nuestro bot le pondremos el nombre de cliente
 client = discord.Client()
 
+#aqui comprobamos si ya se conecto o no
 @client.event
 async def on_ready():
     print(f'{client.user.name} has connected to Discord!')
 
-@client.event
-async def on_member_join(member):
-    await member.create_dm()
-    await member.dm_channel.send(
-        f'Bienvenidos a todos los nuevos integrantes excepto a {member.name}!'
-    )
 
+# funcion para contestar mensajes
 @client.event
 async def on_message(message):
+
+    # checa si el mensaje es de otro ususario, no de el mismo
     if message.author == client.user:
         return
 
-    saludos = [
-        'Hola buenos dias.',
-        'Como andamios',
-        'Que pasa paps'
-    ]
-
+    # depende de que le mandemos es la respuesta que nos da
     if message.content == 'Hola':
-        response = saludos[0]
+        response = 'Hola buenos dias.'
         await message.channel.send(response)
+
     elif message.content == 'Que tranza carnal':
-        response = saludos[1]
+        response = 'Como andamios'
         await message.channel.send(response)
+
     elif message.content == 'Qui hubo mirrey':
-            response = saludos[2]
+            response = 'Que pasa paps'
             await message.channel.send(response)
+
     else:
         response = 'no te entendi bro/sis'
         await message.channel.send(response)
+        
 client.run(TOKEN)
