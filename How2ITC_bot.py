@@ -3,24 +3,31 @@
 # libreria para conectar el programa con discord
 import discord
 
-# el token de nuestro bot. DIFERENTE PARA CADA PERSONA
-TOKEN = 'aqui pon tu token'
+# para poder usar los comandos
+from discord.ext import commands
 
-# cliente es la conexion con discord
-client = discord.Client()
+# el token de nuestro bot. DIFERENTE PARA CADA PERSONA
+TOKEN = 'tu token'
+GUILD = 'tu server'
+
+# aqui es como queremos usar nuestros comandos
+bot = commands.Bot(command_prefix='!')
 
 #aqui comprobamos si ya se conecto o no
-@client.event
+@bot.event
 async def on_ready():
-    print(f'{client.user.name} has connected to Discord!')
-
+    guild = guild = discord.utils.get(bot.guilds, name=GUILD)
+    print(
+        f'{bot.user} is connected to the following guild:\n'
+        f'{guild.name}(id: {guild.id})'
+    )
 
 # funcion para contestar mensajes
-@client.event
+@bot.event
 async def on_message(message):
 
     # checa si el mensaje es de otro ususario, no de el mismo
-    if message.author == client.user:
+    if message.author == bot.user:
         return
 
     # depende de que le mandemos es la respuesta que nos da
@@ -36,8 +43,7 @@ async def on_message(message):
             response = 'Que pasa paps'
             await message.channel.send(response)
 
-    else:
-        response = 'no te entendi bro/sis'
-        await message.channel.send(response)
-        
-client.run(TOKEN)
+    await bot.process_commands(message)
+
+bot.run(TOKEN)
+
